@@ -63,7 +63,7 @@ install_fonts() {
 }
 
 setup_git() {
-    git config --global user.name "Sebastian-Francis-Taylor"
+    git config --global user.name "tayctl"
     git config --global user.email "git@sebastiantaylor.com"
 }
 
