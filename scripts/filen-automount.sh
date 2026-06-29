@@ -11,19 +11,23 @@
 # Copyright 2026, Sebastian F. Taylor
 # May be used under the terms of the MIT License.
 
-filen=$HOME/.filen-cli/bin/filen
-mountpoint=$HOME/Cloud
+filen="$HOME/.filen-cli/bin/filen"
+mountpoint="$HOME/Cloud"
 max_attempts=3
 
-
 notify() {
-    local urgency="$1" title="$2" body="$3"
+    local urgency="$1"
+    local title="$2"
+    local body="$3"
 
-    if command -v notify-send &>/dev/null; then     # gnome/kde/most DEs
+    if command -v notify-send >/dev/null 2>&1; then
+        # GNOME, KDE, most desktop environments
         notify-send -u "$urgency" "$title" "$body"
-    elif command -v dunstify &>/dev/null; then      # arch + dunst
+    elif command -v dunstify >/dev/null 2>&1; then
+        # Dunst
         dunstify -u "$urgency" "$title" "$body"
-    elif command -v kdialog &>/dev/null; then       # kde without libnotify
+    elif command -v kdialog >/dev/null 2>&1; then
+        # KDE without libnotify
         kdialog --passivepopup "$title: $body" 10
     else
         echo "[$urgency] $title - $body" >&2
@@ -32,58 +36,76 @@ notify() {
 
 mount_drive() {
     local attempt=${1:-1}
+    local output
+    local status
 
     if mountpoint -q "$mountpoint"; then
-        echo "already mounted"
+        echo "Already mounted."
         return 0
     fi
 
-    echo "not mounted, attempting to mount..."
+    echo "Not mounted, attempting to mount..."
     mkdir -p "$mountpoint"
-    $filen --skip-update mount "$mountpoint"
+
+    # Capture both stdout and stderr
+    output=$("$filen" --skip-update mount "$mountpoint" 2>&1)
+    status=$?
+
+    # Give FUSE a moment to finish mounting
     sleep 2
 
     if mountpoint -q "$mountpoint"; then
-        echo "mounted successfully"
-    else
-        notify critical "Filen Mount Failed" 
-            \ "could not mount cloud storage (attempt $attempt/$max_attempts)"
-        return 1
+        echo "Mounted successfully."
+        return 0
     fi
+
+    # Keep notifications reasonably short
+    output=$(printf '%s\n' "$output" | tail -n 10)
+
+    notify critical "Filen Mount Failed" \
+        "Could not mount cloud storage (attempt $attempt/$max_attempts)
+
+Exit code: $status
+
+${output:-No error output.}"
+
+    return 1
 }
 
 try_connect() {
-
-
     local attempt=${1:-1}
 
     if ping -c1 -W1 1.1.1.1 >/dev/null 2>&1; then
         if mount_drive "$attempt"; then
-            notify normal "Filen Drive Mounted" 
-                \ "your filen drive has been mounted at $mountpoint"
+            notify normal "Filen Drive Mounted" \
+                "Your Filen drive has been mounted at: $mountpoint"
             return 0
         fi
+
         return 1
     fi
 
-    echo "attempt $attempt/$max_attempts: no internet"
+    echo "Attempt $attempt/$max_attempts: No internet."
 
     if [ "$attempt" -ge "$max_attempts" ]; then
-        notify critical "No Internet" 
-            \ "cloud storage could not be mounted after $max_attempts attempts"
+        notify critical "No Internet" \
+            "Cloud storage could not be mounted after $max_attempts attempts."
         return 1
     fi
 
-    echo "retrying in 2 minutes..."
+    echo "Retrying in 2 minutes..."
     sleep 120
+
     try_connect $((attempt + 1))
 }
 
 main() {
     if [[ ! -x "$filen" ]]; then
-        notify critical "Filen Cli not installed" 
-            \ "please put the filen cli executable in $filen"
-        return 1 
+        notify critical "Filen CLI Not Installed" \
+            "Please place the Filen CLI executable at:
+
+$filen"
+        return 1
     fi
 
     try_connect
