@@ -1,3 +1,4 @@
+zstyle ':omz:plugins:git' aliases no
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
@@ -70,7 +71,8 @@ ENABLE_CORRECTION="false"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git autoenv)
+
+plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -108,13 +110,16 @@ alias vim='nvim'
 alias lock='hyprlock'
 alias cat='bat'
 
-export FCD_SEARCH_DIRS="$HOME/Documents $HOME/Projects $HOME/Uni $HOME/dotfiles"
+bindkey '^f' fcd
+
+export FCD_SEARCH_DIRS="$HOME/Documents $HOME/Projects $HOME/Uni $HOME/dotfiles $HOME/Pictures"
 
 # Wayland/Hyprland environment variables
 export WLR_NO_HARDWARE_CURSORS=1
 export MOZ_ENABLE_WAYLAND=1
 export MOZ_USE_XINPUT2=1
 export EDITOR=nvim
+export PATH="/usr/sbin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.filen-cli/bin:$PATH"
 
@@ -129,4 +134,10 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 export JAVA_HOME=/usr/lib/jvm/java-25-openjdk
 export PATH=$JAVA_HOME/bin:$PATH
 
+alias npm='pnpm'
+
 source ~/.autoenv/activate.sh
+
+eval "$(atuin init zsh)"
+
+. "$HOME/.atuin/bin/env"

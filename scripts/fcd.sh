@@ -12,6 +12,9 @@
 # Copyright 2026, Sebastian F. Taylor
 # May be used under the terms of the MIT License.
 
+
+# Function sanity_check
+# checks that the relevant programs are installed on the machine before running the script
 sanity_check() {
     if ! command -v tmux >/dev/null 2>&1
     then 
@@ -58,7 +61,7 @@ find_directories() {
     selection=$(printf "%s\n%s" "$tmux_sessions" "$file_dirs" | fzf --ansi)
     
     # If a tmux session was selected, extract the session name and switch to it
-    if [[ "$selection" == *"[ TMUX ]"* ]]; then
+    if [[ "$selection" == *"[ TMUX ]"* ]]; then 
         session_name=$(echo "$selection" \
             | sed 's/\x1b\[[0-9;]*m//g' \
             | sed 's/\[ TMUX \] \(.*\) ->.*/\1/')

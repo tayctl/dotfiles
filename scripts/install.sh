@@ -13,8 +13,11 @@ install_applications() {
     # Core (change to intel-ucode if there is an intel chip in the system)
     sudo pacman -S --noconfirm --needed amd-ucode
     # Wifi, bluetooth etc
-    sudo pacman -S --noconfirm --needed bluez bluez-utils cups networkmanager \ 
-                            ufw iptables nftables
+    sudo pacman -S --noconfirm --needed bluez bluez-utils networkmanager ufw  \
+                                        iptables nftables
+
+    sudo pacman -S --noconfirm -- needed  cups cups-pdf cups-filters \
+                                          system-config-printer avahi nss-mdns
 
     # CLI Tools
     sudo pacman -S --noconfirm --needed neovim fzf tree-sitter tree-sitter-cli \
@@ -103,6 +106,7 @@ system_services() {
     sudo systemctl enable NetworkManager
     sudo systemctl enable bluetooth
     sudo systemctl enable cups
+    sudo systemctl enable --now cups.socket avahi-daemon.service
     sudo systemctl enable fstrim.timer
     sudo systemctl enable ufw.service
     sudo usermod -aG wheel,audio,video,input,storage "$USER"

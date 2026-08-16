@@ -10,7 +10,6 @@
     ],
     "modules-right": [
         "tray",
-        "custom/bluetooth",
         "network",
         "battery",
         "clock"
@@ -82,15 +81,6 @@
         },
         "active": "",
         "sort-by-number": true
-    },
-    "custom/bluetooth": {
-        "format": " {}",
-        "exec": "~/dotfiles/dots/.config/waybar/scripts/bluetooth.sh ",
-        "interval": 10,
-        "on-click": "blueman-manager",
-        "return-type": "plain",
-        "tooltip": false,
-        "max-length": 25
     },
     "tray": {
         "icon-size": 16,

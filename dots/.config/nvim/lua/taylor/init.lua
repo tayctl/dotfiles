@@ -10,4 +10,4 @@ require('taylor.neogit')
 require('taylor.colorizer')
 require('taylor.harpoon')
 require('taylor.scollOffEOF')
-
+require('taylor.sql')
