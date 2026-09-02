@@ -1,0 +1,6 @@
+[Unit]
+Description=Remove old files from ~/temp
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/bash %h/.local/bin/temp-clean

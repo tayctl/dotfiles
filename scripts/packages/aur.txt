@@ -1,0 +1,12 @@
+tlrc-bin
+zen-browser-bin
+iwgtk
+bibata-cursor-theme-bin
+hyprshot
+zotero
+vscodium-bin
+google-chrome
+vesktop
+bitwarden
+bambustudio-bin
+paccache-hook

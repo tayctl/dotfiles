@@ -2,7 +2,7 @@
 # temp-clean.sh
 #
 # Removes files and directories in $HOME/temp that haven't been modified
-# in the last 30 days. Intended to be run once at login/boot.
+# in the last 30 days. Intended to be run by a systemd user timer.
 #
 # Copyright 2026, Sebastian F. Taylor
 # May be used under the terms of the MIT License.

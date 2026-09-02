@@ -1,9 +1,8 @@
 #!/bin/bash
 # filen-automount.sh - Mount Filen cloud storage via FUSE
 #
-# Waits for an internet connection and mounts the Filen drive. Retries up to 3
-# times at 2 minute intervals before giving up. Designed to run as a systemd
-# user service.
+# Waits for an internet connection and mounts the Filen drive. Retries up to
+# three times at two-minute intervals. Designed for a systemd user service.
 #
 # Supports notify-send (GNOME/KDE), dunstify (dunst), and kdialog as
 # notification backends.
@@ -73,30 +72,27 @@ ${output:-No error output.}"
 }
 
 try_connect() {
-    local attempt=${1:-1}
+    local attempt
 
-    if ping -c1 -W1 1.1.1.1 >/dev/null 2>&1; then
-        if mount_drive "$attempt"; then
+    for ((attempt = 1; attempt <= max_attempts; attempt++)); do
+        if command -v nm-online >/dev/null 2>&1 &&
+            ! nm-online --quiet --timeout=30; then
+            echo "Attempt $attempt/$max_attempts: Network is not ready."
+        elif mount_drive "$attempt"; then
             notify normal "Filen Drive Mounted" \
                 "Your Filen drive has been mounted at: $mountpoint"
             return 0
         fi
 
-        return 1
-    fi
+        if (( attempt < max_attempts )); then
+            echo "Retrying in 2 minutes..."
+            sleep 120
+        fi
+    done
 
-    echo "Attempt $attempt/$max_attempts: No internet."
-
-    if [ "$attempt" -ge "$max_attempts" ]; then
-        notify critical "No Internet" \
-            "Cloud storage could not be mounted after $max_attempts attempts."
-        return 1
-    fi
-
-    echo "Retrying in 2 minutes..."
-    sleep 120
-
-    try_connect $((attempt + 1))
+    notify critical "Filen Mount Failed" \
+        "Cloud storage could not be mounted after $max_attempts attempts."
+    return 1
 }
 
 main() {

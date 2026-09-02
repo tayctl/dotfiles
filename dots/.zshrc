@@ -90,7 +90,7 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='nvim'
 # fi
 #
-export EDITOR='NVIM'
+export EDITOR='nvim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch $(uname -m)"
@@ -110,7 +110,12 @@ alias vim='nvim'
 alias lock='hyprlock'
 alias cat='bat'
 
-bindkey '^f' fcd
+fcd-widget() {
+  fcd
+  zle reset-prompt
+}
+zle -N fcd-widget
+bindkey '^f' fcd-widget
 
 export FCD_SEARCH_DIRS="$HOME/Documents $HOME/Projects $HOME/Uni $HOME/dotfiles $HOME/Pictures"
 
@@ -123,21 +128,19 @@ export PATH="/usr/sbin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.filen-cli/bin:$PATH"
 
-# Global python install 
-source ~/.globalenv/bin/activate
+# Global Python environment
+source "$HOME/.globalenv/bin/activate"
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 # filen-cli
 # PATH=$PATH:~/.filen-cli/bin
 #
 
-export JAVA_HOME=/usr/lib/jvm/java-25-openjdk
+export JAVA_HOME=/usr/lib/jvm/default
 export PATH=$JAVA_HOME/bin:$PATH
 
 alias npm='pnpm'
 
-source ~/.autoenv/activate.sh
+[[ -f "$HOME/.autoenv/activate.sh" ]] && source "$HOME/.autoenv/activate.sh"
 
-eval "$(atuin init zsh)"
-
-. "$HOME/.atuin/bin/env"
+command -v atuin >/dev/null 2>&1 && eval "$(atuin init zsh)"

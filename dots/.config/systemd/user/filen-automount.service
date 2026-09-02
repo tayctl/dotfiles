@@ -1,0 +1,8 @@
+[Unit]
+Description=Mount Filen cloud storage
+After=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/bash %h/.local/bin/filen-automount
+TimeoutStartSec=7min
