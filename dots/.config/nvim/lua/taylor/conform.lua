@@ -1,23 +1,36 @@
 require('conform').setup({
-  formatters_by_ft = {
-    javascript = { 'prettier' },
-    javascriptreact = { 'prettier' },
-    typescript = { 'prettier' },
-    typescriptreact = { 'prettier' },
-    json = { 'prettier' },
-    css = { 'prettier' },
-    html = { 'prettier' },
-    markdown = { 'prettier' },
-    yaml = { 'prettier' },
-    typst = { 'typstyle' },
-  },
-  formatters = {
-    typstyle = {
-      command = vim.fn.stdpath('data') .. '/mason/bin/typstyle',
-      prepend_args = { '--wrap-text' },
+    formatters_by_ft = {
+        javascript = { 'prettier' },
+        javascriptreact = { 'prettier' },
+        typescript = { 'prettier' },
+        typescriptreact = { 'prettier' },
+        json = { 'prettier' },
+        css = { 'prettier' },
+        html = { 'prettier' },
+        markdown = { 'prettier' },
+        yaml = { 'prettier' },
+        typst = { 'typstyle' },
+        java = { 'spotless' },
     },
-    prettier = {
-      command = vim.fn.stdpath('data') .. '/mason/bin/prettier',
+    formatters = {
+        typstyle = {
+            command = vim.fn.stdpath('data') .. '/mason/bin/typstyle',
+            prepend_args = { '--wrap-text' },
+        },
+        prettier = {
+            command = vim.fn.stdpath('data') .. '/mason/bin/prettier',
+        },
+        spotless = {
+            command = 'gradle',
+            args = {
+                '--quiet',
+                '--console=plain',
+                'spotlessApply',
+                '-PspotlessIdeHook=$FILENAME',
+                '-PspotlessIdeHookUseStdIn',
+                '-PspotlessIdeHookUseStdOut',
+            },
+            stdin = true,
+        },
     },
-  },
 })
