@@ -134,7 +134,8 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 # filen-cli
 # PATH=$PATH:~/.filen-cli/bin
-#
+
+eval "$(direnv hook zsh)"
 
 export JAVA_HOME=/usr/lib/jvm/default
 export PATH=$JAVA_HOME/bin:$PATH
