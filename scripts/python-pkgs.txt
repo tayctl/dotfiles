@@ -41,7 +41,6 @@ packaging
 pandas
 parso
 pexpect
-PhysicsOneA
 pillow
 pip
 platformdirs
