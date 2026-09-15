@@ -24,6 +24,7 @@ Desktop.ini
 
 dots/.config/nvim/plugin/
 dots/.config/nvim/.netrwhist
+dotfiles/.config/nvim/lazy-lock.json
 
 # Local symlink directory (not needed in repo)
 /.config/
@@ -48,3 +49,4 @@ dots/.config/nvim/.netrwhist
 __pycache__/
 *.py[cod]
 *$py.class
+
