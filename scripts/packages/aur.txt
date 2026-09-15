@@ -10,3 +10,5 @@ vesktop
 bitwarden
 bambustudio-bin
 paccache-hook
+nix
+direnv

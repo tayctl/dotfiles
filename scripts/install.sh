@@ -427,6 +427,7 @@ setup_services() {
         avahi-daemon.service \
         fstrim.timer \
         power-profiles-daemon.service
+        nix-daemon.service
 
     as_root usermod -aG wheel,audio,video,input,storage "$USER"
 
