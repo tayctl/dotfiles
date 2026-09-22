@@ -4,15 +4,21 @@
   lib,
   ...
 }:
-
+let
+  dotfiles = "${config.home.homeDirectory}/dotfiles"; # adjust if your repo lives elsewhere
+  link = path: config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
+in
 {
   home.username = "taylor";
   home.homeDirectory = "/home/taylor";
 
   programs.git = {
     enable = true;
-    userName = "tayctl";
-    userEmail = "me@sebastiantaylor.com";
+
+    settings.user = {
+      name = "tayctl";
+      email = "me@sebastiantaylor.com";
+    };
 
     includes = [
       {
@@ -46,19 +52,18 @@
     unzip
     tmux
     tree-sitter
-    tree-sitter-cli
   ];
 
   home.file = {
-    ".zshrc".source = ../../.zshrc;
-    ".tmux.conf".source = ../../.tmux.conf;
-    ".config/foot".source = ../foot;
-    ".config/hypr".source = ../hypr;
-    ".config/kitty".source = ../kitty;
-    ".config/waybar".source = ../waybar;
-    ".config/wofi".source = ../wofi;
-    ".config/btop".source = ../btop;
-    ".config/batsignal".source = ../batsignal;
+    ".zshrc".source = link "dots/.zshrc";
+    ".tmux.conf".source = link "dots/.tmux.conf";
+    ".config/foot".source = link "dots/.config/foot";
+    ".config/hypr".source = link "dots/.config/hypr";
+    ".config/kitty".source = link "dots/.config/kitty";
+    ".config/waybar".source = link "dots/.config/waybar";
+    ".config/wofi".source = link "dots/.config/wofi";
+    ".config/btop".source = link "dots/.config/btop";
+    ".config/batsignal".source = link "dots/.config/batsignal";
   };
 
   home.sessionVariables = {

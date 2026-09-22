@@ -68,24 +68,15 @@ ttf-ibmplex-mono-nerd
 ttf-ibm-plex
 adwaita-icon-theme
 
-# CLI tools
+# CLI tools (fzf, ripgrep, tmux, bat, atuin, tree, unzip, tree-sitter: Nix/home-manager)
 neovim
-fzf
-tree-sitter
-tree-sitter-cli
-ripgrep
-tmux
 btop
 fastfetch
-tree
 sudo-rs
 bc
-bat
 zsh
-atuin
 zoxide
 eza
-unzip
 usbutils
 
 # Documents and media

@@ -213,11 +213,11 @@ describe_action() {
         install_fonts)
             print_command fc-cache -f
             ;;
-        setup_git)
-            printf '  action: set missing global Git name and email values\n'
+        setup_home_manager)
+            printf '  action: install Nix if needed and apply home-manager flake\n'
             ;;
         setup_dotfiles)
-            printf '  action: restow dots/ into %s and install Electron flags\n' \
+            printf '  action: restow nvim/systemd into %s and install Electron flags\n' \
                 "$HOME"
             ;;
         setup_python)
@@ -333,19 +333,26 @@ install_fonts() {
     fc-cache -f
 }
 
-setup_git() {
-    if [[ -z "$(git config --global --get user.name || true)" ]]; then
-        git config --global user.name "tayctl"
+setup_home_manager() {
+    # Non-interactive installs often lack the login-shell Nix PATH.
+    if [[ -f /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]]; then
+        # shellcheck source=/dev/null
+        . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
     fi
 
-    if [[ -z "$(git config --global --get user.email || true)" ]]; then
-        git config --global user.email "git@sebastiantaylor.com"
-    fi
+    "$REPO_ROOT/scripts/bootstrap.sh"
 }
 
 setup_dotfiles() {
     mkdir -p "$HOME/.config"
-    stow --restow --dir "$REPO_ROOT" --target "$HOME" dots
+    # Home Manager owns .zshrc, .tmux.conf, and the desktop configs in home.nix.
+    # Leave home-manager/ and nix/ alone too (bootstrap manages those).
+    # --no-folding avoids linking all of .config as one symlink past the ignores.
+    stow --restow --no-folding --dir "$REPO_ROOT" --target "$HOME" \
+        --ignore='^\.zshrc$' \
+        --ignore='^\.tmux\.conf$' \
+        --ignore='^\.config/(foot|hypr|kitty|waybar|wofi|btop|batsignal|home-manager|nix)(/|$)' \
+        dots
     install -m 0644 "$REPO_ROOT/flags/electron-flags.conf" \
         "$HOME/.config/electron-flags.conf"
     install -m 0644 "$REPO_ROOT/flags/code-flags.conf" \
@@ -426,7 +433,7 @@ setup_services() {
         cups.socket \
         avahi-daemon.service \
         fstrim.timer \
-        power-profiles-daemon.service
+        power-profiles-daemon.service \
         nix-daemon.service
 
     as_root usermod -aG wheel,audio,video,input,storage "$USER"
@@ -533,8 +540,8 @@ main() {
     run_step "Installing AUR packages" install_aur_packages
     run_step "Installing the Filen CLI" install_filen_cli
     run_step "Refreshing fonts" install_fonts
-    run_step "Configuring Git" setup_git
-    run_step "Stowing dotfiles" setup_dotfiles
+    run_step "Bootstrapping Nix home-manager" setup_home_manager
+    run_step "Stowing remaining dotfiles" setup_dotfiles
     run_step "Configuring Python" setup_python
     run_step "Configuring Rust" setup_rust
     run_step "Linking user scripts" setup_scripts

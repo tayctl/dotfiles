@@ -1,4 +1,4 @@
-foot
+# foot, direnv, nix: Nix/home-manager (Determinate Nix via bootstrap.sh)
 tlrc-bin
 zen-browser-bin
 iwgtk
@@ -11,5 +11,3 @@ vesktop
 bitwarden
 bambustudio-bin
 paccache-hook
-nix
-direnv

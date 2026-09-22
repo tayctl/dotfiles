@@ -117,6 +117,14 @@ fcd-widget() {
 zle -N fcd-widget
 bindkey '^f' fcd-widget
 
+home-manager() {
+  if [[ "$1" == "switch" ]]; then
+    command home-manager switch --flake ~/.config/home-manager#taylor "${@:2}"
+  else
+    command home-manager "$@"
+  fi
+}
+
 export FCD_SEARCH_DIRS="$HOME/Documents $HOME/Projects $HOME/Uni $HOME/dotfiles $HOME/Pictures"
 
 # Wayland/Hyprland environment variables
@@ -124,7 +132,6 @@ export WLR_NO_HARDWARE_CURSORS=1
 export MOZ_ENABLE_WAYLAND=1
 export MOZ_USE_XINPUT2=1
 export EDITOR=nvim
-export PATH="/usr/sbin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.filen-cli/bin:$PATH"
 
@@ -155,3 +162,5 @@ export MANPAGER='less -R -N'
 
 export GIT_PAGER='less'
 export GIT_CONFIG_PAGER='less'
+
+export PATH="$HOME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:$PATH"

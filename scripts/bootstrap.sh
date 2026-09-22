@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
-DOTS="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/dots/.config/home-manager"
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+DOTS="$REPO_ROOT/dots/.config/home-manager"
 HM="$HOME/.config/home-manager"
 
 # get nix if it's not here yet

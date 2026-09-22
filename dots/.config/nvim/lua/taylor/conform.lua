@@ -11,6 +11,7 @@ require('conform').setup({
         yaml = { 'prettier' },
         typst = { 'typstyle' },
         java = { 'spotless' },
+        nix = { 'nixfmt' },
     },
     formatters = {
         typstyle = {
