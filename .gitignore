@@ -45,6 +45,10 @@ dotfiles/.config/nvim/lazy-lock.json
 !dots/.config/
 !dots/.config/**
 
+# systemd enable state + HM-generated targets (machine/nix-local)
+dots/.config/systemd/user/*.target.wants/
+dots/.config/systemd/user/tray.target
+
 # Compiled Python files
 __pycache__/
 *.py[cod]
