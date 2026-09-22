@@ -111,8 +111,8 @@ alias lock='hyprlock'
 alias cat='bat'
 
 fcd-widget() {
-  fcd
-  zle reset-prompt
+  BUFFER="fcd"
+  zle accept-line
 }
 zle -N fcd-widget
 bindkey '^f' fcd-widget
@@ -129,8 +129,8 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.filen-cli/bin:$PATH"
 
 # Global Python environment
-source "$HOME/.globalenv/bin/activate"
 export VIRTUAL_ENV_DISABLE_PROMPT=1
+source "$HOME/.globalenv/bin/activate"
 
 # filen-cli
 # PATH=$PATH:~/.filen-cli/bin
@@ -145,3 +145,13 @@ alias npm='pnpm'
 [[ -f "$HOME/.autoenv/activate.sh" ]] && source "$HOME/.autoenv/activate.sh"
 
 command -v atuin >/dev/null 2>&1 && eval "$(atuin init zsh)"
+
+# less configuration
+export LESS='-R -M -i -X -N'
+export LESSHISTFILE="$HOME/.lesshst"
+
+export PAGER='less'
+export MANPAGER='less -R -N'
+
+export GIT_PAGER='less'
+export GIT_CONFIG_PAGER='less'

@@ -1,3 +1,4 @@
+foot
 tlrc-bin
 zen-browser-bin
 iwgtk
