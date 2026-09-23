@@ -34,4 +34,7 @@
 
   programs.nix-ld.enable = true;
   services.openssh.enable = true;
+
+  programs.zsh.enable = true;
+  users.users.taylor.shell = pkgs.zsh;
 }
