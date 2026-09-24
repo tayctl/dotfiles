@@ -12,6 +12,7 @@ require('conform').setup({
         typst = { 'typstyle' },
         java = { 'spotless' },
         nix = { 'nixfmt' },
+        c = { "clang_format" },
     },
     formatters = {
         typstyle = {
