@@ -34,53 +34,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
 })
 
--- Mason setup
-require('mason').setup({})
-require('mason-lspconfig').setup({
-  ensure_installed = {'clangd', 'pyright', 'texlab', 'fsautocomplete'},
-  handlers = {
-    -- Default handler for all servers
-    function(server_name)
-      require('lspconfig')[server_name].setup({
-        capabilities = lsp_capabilities,
-      })
-    end,
-    
-    -- Custom handler for lua_ls
-    lua_ls = function()
-      require('lspconfig').lua_ls.setup({
-        capabilities = lsp_capabilities,
-        settings = {
-          Lua = {
-            runtime = {
-              version = 'LuaJIT'
-            },
-            diagnostics = {
-              globals = {'vim'},
-            },
-            workspace = {
-              library = {
-                vim.env.VIMRUNTIME,
-              }
-            }
-          }
-        }
-      })
-    end,
-    
-    fsautocomplete = function()
-      require('lspconfig').fsautocomplete.setup({
-        capabilities = lsp_capabilities,
-        cmd = {'fsautocomplete', '--background-service-enabled'},
-        filetypes = {'fsharp'},
-        init_options = {
-          AutomaticWorkspaceInit = true,
-        }
-      })
-    end,
-  }
-})
-
 -- nvim-cmp setup
 local cmp = require('cmp')
 local cmp_select = {behavior = cmp.SelectBehavior.Select}
