@@ -25,6 +25,12 @@ in
     ".config/batsignal".source = link "dots/.config/batsignal";
   };
 
+  xdg.userDirs = {
+    enable = true;
+    createDirectories = true;
+    setSessionVariables = true;
+  };
+
   qt = {
     enable = true;
     platformTheme.name = "gtk3";
@@ -40,4 +46,5 @@ in
     gtk.enable = true;
     x11.enable = true;
   };
+
 }
