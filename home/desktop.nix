@@ -13,6 +13,10 @@ in
     foot
     kitty
     waybar
+    hypridle
+    hyprlock
+    hyprpaper
+    hyprpicker
     hyprlauncher
     batsignal
     kdePackages.dolphin
