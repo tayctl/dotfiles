@@ -36,5 +36,12 @@
   services.openssh.enable = true;
 
   programs.zsh.enable = true;
+  programs.zsh.ohMyZsh = {
+    enable = true;
+    theme = "flazz";
+    plugins = [
+      "git"
+    ];
+  };
   users.users.taylor.shell = pkgs.zsh;
 }
