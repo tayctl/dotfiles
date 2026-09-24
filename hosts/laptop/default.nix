@@ -6,7 +6,7 @@
     ./hardware-configuration.nix
   ];
 
-  networking.hostName = "desktop";
+  networking.hostName = "ThinkNix";
   system.stateVersion = "26.05";
 
   boot.loader.systemd-boot.enable = true;
