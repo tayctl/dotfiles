@@ -33,6 +33,7 @@ in
     ".config/waybar".source = link "dots/.config/waybar";
     ".config/wofi".source = link "dots/.config/wofi";
     ".config/batsignal".source = link "dots/.config/batsignal";
+    ".config/nvim".source = link "dots.config/nvim";
   };
 
   xdg.userDirs = {
