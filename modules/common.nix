@@ -33,6 +33,16 @@
     vim
     curl
     wget
+
+    (neovim.override {
+      vimAlias = true;
+    })
+
+    bash-language-server
+    shellcheck
+    shfmt
+    nil
+    nixfmt
   ];
 
   programs.nix-ld.enable = true;
