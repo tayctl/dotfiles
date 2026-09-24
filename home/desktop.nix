@@ -12,6 +12,8 @@ in
     batsignal
     kdePackages.dolphin
     kdePackages.kio-extras
+    signal-desktop
+    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   home.file = {

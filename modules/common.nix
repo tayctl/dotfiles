@@ -30,6 +30,7 @@
     vim
     curl
     wget
+    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   programs.nix-ld.enable = true;
