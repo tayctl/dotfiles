@@ -14,6 +14,7 @@ in
     kdePackages.kio-extras
     signal-desktop
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+    nerd-fonts.blex-mono
   ];
 
   home.file = {
@@ -46,5 +47,7 @@ in
     gtk.enable = true;
     x11.enable = true;
   };
+
+  fonts.fontconfig.enable = true; # without this, apps don't see the fonts
 
 }
