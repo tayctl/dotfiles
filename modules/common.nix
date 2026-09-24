@@ -11,6 +11,9 @@
   };
   nixpkgs.config.allowUnfree = true;
 
+  security.sudo.enable = false;
+  security.sudo-rs.enable = true;
+
   networking.networkmanager.enable = true;
 
   time.timeZone = "Europe/Copenhagen";
@@ -30,7 +33,6 @@
     vim
     curl
     wget
-    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   programs.nix-ld.enable = true;
