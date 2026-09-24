@@ -11,9 +11,6 @@
   };
   nixpkgs.config.allowUnfree = true;
 
-  security.sudo.enable = false;
-  security.sudo-rs.enable = true;
-
   networking.networkmanager.enable = true;
 
   time.timeZone = "Europe/Copenhagen";
