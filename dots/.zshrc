@@ -104,8 +104,6 @@ export EDITOR='nvim'
 # For a full list of active aliases, run `alias`.
 
 # Terminal workflow
-alias sudo='sudo-rs'
-alias sudoedit='sudoedit-rs'
 alias vim='nvim'
 alias lock='hyprlock'
 alias cat='bat'

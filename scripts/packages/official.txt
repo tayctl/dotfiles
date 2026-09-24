@@ -72,7 +72,6 @@ adwaita-icon-theme
 neovim
 btop
 fastfetch
-sudo-rs
 bc
 zsh
 zoxide
