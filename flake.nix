@@ -19,7 +19,7 @@
       home-manager,
       nixos-hardware,
       ...
-    }:
+    }@inputs:
     {
       nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -28,6 +28,7 @@
           ./hosts/laptop
           home-manager.nixosModules.home-manager
           {
+            home-manager.extraSpecialArgs = { inherit inputs; };
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.taylor.imports = [
