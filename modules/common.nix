@@ -57,4 +57,12 @@
     ];
   };
   users.users.taylor.shell = pkgs.zsh;
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+  };
+
+  nix.optimise.automatic = true; # removes duplicates from nix-store
 }
