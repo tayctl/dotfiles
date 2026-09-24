@@ -42,18 +42,18 @@ in
     tree-sitter
   ];
 
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    vimAlias = true;
-    extraPackages = with pkgs; [
-      bash-language-server
-      shellcheck
-      shfmt
-      nil
-      nixfmt
-    ];
-  };
+  #  programs.neovim = {
+  #    enable = true;
+  #    defaultEditor = true;
+  #    vimAlias = true;
+  #    extraPackages = with pkgs; [
+  #      bash-language-server
+  #      shellcheck
+  #      shfmt
+  #      nil
+  #      nixfmt
+  #    ];
+  #  };
 
   home.file = {
     ".zshrc".source = link "dots/.zshrc";
