@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 let
   dotfiles = "${config.home.homeDirectory}/dotfiles";
   link = path: config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
@@ -8,7 +13,7 @@ in
     foot
     kitty
     waybar
-    wofi
+    hyprlauncher
     batsignal
     kdePackages.dolphin
     kdePackages.kio-extras
