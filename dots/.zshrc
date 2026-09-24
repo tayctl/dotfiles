@@ -74,7 +74,7 @@ ENABLE_CORRECTION="false"
 
 plugins=(git)
 
-source $ZSH/oh-my-zsh.sh
+#source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -132,10 +132,6 @@ export MOZ_USE_XINPUT2=1
 export EDITOR=nvim
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.filen-cli/bin:$PATH"
-
-# Global Python environment
-export VIRTUAL_ENV_DISABLE_PROMPT=1
-source "$HOME/.globalenv/bin/activate"
 
 # filen-cli
 # PATH=$PATH:~/.filen-cli/bin
