@@ -12,4 +12,30 @@
     alsa.enable = true;
     pulse.enable = true;
   };
+
+  services.printing = {
+    enable = true;
+    drivers = with pkgs; [
+      gutenprint
+      gutenprintBin
+      hplip
+      brlaser
+      brgenml1lpr
+      splix
+    ];
+  };
+  
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+  
+  hardware.printers = {
+    ensureDefaultPrinter = null; 
+  };
+  
+  services.printing.browsing = true;
+
+  environment.systemPackages = with pkgs; [ system-config-printer ];
 }
