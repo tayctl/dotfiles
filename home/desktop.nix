@@ -45,9 +45,8 @@ in
 
   qt = {
     enable = true;
-    platformTheme.name = "gtk3";
-    style.name = "adwaita-dark";
-    style.package = pkgs.adwaita-qt;
+    platformTheme.name = "kde";
+    style.name = "breeze";
   };
 
   home.pointerCursor = {
