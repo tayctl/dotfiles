@@ -11,3 +11,9 @@ git add .
 sudo env NIX_CONFIG="experimental-features = nix-command flakes" 
 sudo nixos-rebuild switch --flake .#laptop
 ```
+
+## Eduroam
+
+```bash
+nix run 'github:mayniklas/eduroam-flake'#install-eduroam-dtu
+```
