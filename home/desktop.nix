@@ -35,6 +35,8 @@ in
     ".config/wofi".source = link "dots/.config/wofi";
     ".config/batsignal".source = link "dots/.config/batsignal";
     ".config/nvim".source = link "dots/.config/nvim";
+
+    ".local/bin".source = link "dots/.local/bin";
   };
 
   xdg.userDirs = {

@@ -76,4 +76,6 @@
   };
 
   nix.optimise.automatic = true; # removes duplicates from nix-store
+
+  environment.localBinInPath = true;
 }
