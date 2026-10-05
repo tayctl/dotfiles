@@ -11,7 +11,12 @@
   };
   nixpkgs.config.allowUnfree = true;
 
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    wifi.backend = "iwd";
+  };
+
+  networking.wireless.enable = false;
 
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.login.enableGnomeKeyring = true;
