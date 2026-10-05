@@ -39,6 +39,10 @@
     curl
     wget
 
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-color-emoji
+
     (neovim.override {
       vimAlias = true;
     })
