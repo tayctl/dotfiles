@@ -19,8 +19,7 @@ in
     hyprpicker
     hyprlauncher
     batsignal
-    kdePackages.dolphin
-    kdePackages.kio-extras
+    thunar
     signal-desktop
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     nerd-fonts.blex-mono
