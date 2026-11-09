@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, username, ... }: {
   nix.settings = {
     experimental-features = [
       "nix-command"
@@ -6,7 +6,7 @@
     ];
     trusted-users = [
       "root"
-      "taylor"
+      username
     ];
   };
   nixpkgs.config.allowUnfree = true;
@@ -24,7 +24,7 @@
   time.timeZone = "Europe/Copenhagen";
   i18n.defaultLocale = "en_US.UTF-8";
 
-  users.users.taylor = {
+  users.users.${username} = {
     isNormalUser = true;
     extraGroups = [
       "wheel"
@@ -65,7 +65,7 @@
       "git"
     ];
   };
-  users.users.taylor.shell = pkgs.zsh;
+  users.users.${username}.shell = pkgs.zsh;
 
   boot.loader.systemd-boot.configurationLimit = 10;
 

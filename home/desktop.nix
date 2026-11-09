@@ -20,10 +20,8 @@ in
     hyprlauncher
     batsignal
     thunar
-    signal-desktop
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     nerd-fonts.blex-mono
-    filen-cli
   ];
 
   home.file = {

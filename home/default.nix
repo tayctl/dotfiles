@@ -37,6 +37,8 @@ in
     tmux
     atuin
     direnv
+    lazygit
+    delta # lazygit pager
 
     # dev
     tree-sitter
@@ -59,6 +61,7 @@ in
     ".zshrc".source = link "dots/.zshrc";
     ".tmux.conf".source = link "dots/.tmux.conf";
     ".config/btop".source = link "dots/.config/btop";
+    ".config/lazygit".source = link "dots/.config/lazygit";
   };
 
   home.sessionVariables = {

@@ -20,23 +20,60 @@
       nixos-hardware,
       ...
     }@inputs:
+    let
+      system = "x86_64-linux";
+
+      mkHost =
+        {
+          username,
+          modules,
+          homeModules,
+        }:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs username; };
+          modules = modules ++ [
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.extraSpecialArgs = { inherit inputs username; };
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.${username}.imports = [
+                ./home
+                ./home/desktop.nix
+              ]
+              ++ homeModules;
+            }
+          ];
+        };
+    in
     {
-      nixosConfigurations.laptop = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+      nixosConfigurations.laptop = mkHost {
+        username = "taylor";
         modules = [
           nixos-hardware.nixosModules.lenovo-thinkpad-p14s-amd-gen3
           ./hosts/laptop
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.extraSpecialArgs = { inherit inputs; };
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.taylor.imports = [
-              ./home
-              ./home/desktop.nix
-            ];
-          }
         ];
+        homeModules = [ ./home/personal.nix ];
+      };
+
+      nixosConfigurations.work-desktop = mkHost {
+        username = "sebastian";
+        modules = [ ./hosts/work-desktop ];
+        homeModules = [ ./home/work.nix ];
+      };
+
+      nixosConfigurations.work-laptop = mkHost {
+        username = "sebastian";
+        modules = [ ./hosts/work-laptop ];
+        homeModules = [ ./home/work.nix ];
+      };
+
+      devShells.${system}.yocto = import ./shells/yocto.nix {
+        pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
       };
     };
 }
