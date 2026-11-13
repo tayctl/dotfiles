@@ -48,6 +48,7 @@ find_directories() {
         | sed 's/^TMUX_SESSION:/\x1b[32m[ TMUX ]\x1b[0m /')
     
     file_dirs=$(find $FCD_SEARCH_DIRS \
+        -maxdepth 2 \
         -type d \( \
             -name ".cache" \
             -o -name "node_modules" \
