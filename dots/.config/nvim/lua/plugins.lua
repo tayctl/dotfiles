@@ -46,22 +46,6 @@ return {
     { 'L3MON4D3/LuaSnip' },
     { 'saadparwaiz1/cmp_luasnip' },
 
-    -- Git
-    {
-        'NeogitOrg/Neogit',
-        dependencies = {
-            'nvim-lua/plenary.nvim',
-            'sindrets/diffview.nvim',
-        },
-    },
-    {
-      "tpope/vim-dadbod",
-      dependencies = {
-        "kristijanhusak/vim-dadbod-ui",
-        "kristijanhusak/vim-dadbod-completion",
-      },
-      cmd = { "DB", "DBUI", "DBUIToggle" },
-    },
 
     -- Utilities
     { 'lervag/vimtex' },
