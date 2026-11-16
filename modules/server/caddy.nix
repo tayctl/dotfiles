@@ -8,6 +8,7 @@ let
     calibre  = 8083;
     linkding = 9091;
     nullboard = 8080;
+    forgejo  = 3000;
   };
 in {
   services.caddy = {

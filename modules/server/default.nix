@@ -5,6 +5,7 @@
     ./jellyfin.nix
     ./calibre.nix
     ./containers.nix
+    ./forgejo.nix
     ./samba.nix
   ];
 }
