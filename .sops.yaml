@@ -1,0 +1,7 @@
+keys:
+  - &me age1lufmtdq67mj4yh6gtkuea4w986vg7uqv5phrlz7n9k8sc4zpxufquyrfc2
+  - &theseus age1ju7zhea4fczycqvyupyjjr8g5apktmhvmr9fhu2z9rukcpk2veys9np64k
+creation_rules:
+  - path_regex: sops/theseus\.yaml$
+    key_groups:
+      - age: [*me, *theseus]

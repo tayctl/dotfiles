@@ -1,5 +1,5 @@
 # Things without a good NixOS module stay as podman containers.
-{ ... }: {
+{ config, ... }: {
   virtualisation.podman.enable = true;
   virtualisation.oci-containers.backend = "podman";
 
@@ -9,8 +9,7 @@
       ports = [ "127.0.0.1:9091:9090" ];
       volumes = [ "/var/lib/linkding:/etc/linkding/data" ];
       environment.LD_SUPERUSER_NAME = "taylor";
-      # Password: not in the store. Put LD_SUPERUSER_PASSWORD=... in this file by hand.
-      environmentFiles = [ "/var/lib/secrets/linkding.env" ];
+      environmentFiles = [ config.sops.secrets."linkding.env".path ];
     };
     nullboard = {
       image = "docker.io/luismedel/nullboard:latest";
@@ -22,6 +21,5 @@
   systemd.tmpfiles.rules = [
     "d /var/lib/linkding 0755 root root -"
     "d /var/lib/nullboard 0775 1000 1000 -"
-    "d /var/lib/secrets 0700 root root -"
   ];
 }

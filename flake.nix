@@ -7,6 +7,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     zen-browser = {
       url = "github:youwen5/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -18,6 +23,7 @@
       nixpkgs,
       home-manager,
       nixos-hardware,
+      sops-nix,
       ...
     }@inputs:
     {
@@ -41,7 +47,10 @@
 
       nixosConfigurations.theseus = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./hosts/theseus ];
+        modules = [
+          sops-nix.nixosModules.sops
+          ./hosts/theseus
+        ];
       };
     };
 }

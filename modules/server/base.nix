@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ config, pkgs, ... }: {
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     trusted-users = [ "root" "main" ];
@@ -10,7 +10,7 @@
   users.users.main = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    initialPassword = "changeme"; # `passwd` after first login (no secrets mgmt yet)
+    hashedPasswordFile = config.sops.secrets.main-password-hash.path;
     openssh.authorizedKeys.keys = [
       # "ssh-ed25519 AAAA... taylor@laptop"
     ];
