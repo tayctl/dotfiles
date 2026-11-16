@@ -61,32 +61,45 @@ find_directories() {
     # Combine directories and tmux sessions and pipe to fzf
     selection=$(printf "%s\n%s" "$tmux_sessions" "$file_dirs" | fzf --ansi)
     
+    [ -z "$selection" ] && exit 0
+
     # If a tmux session was selected, extract the session name and switch to it
-    if [[ "$selection" == *"[ TMUX ]"* ]]; then 
+    if [[ "$selection" == *"[ TMUX ]"* ]]; then
         session_name=$(echo "$selection" \
             | sed 's/\x1b\[[0-9;]*m//g' \
             | sed 's/\[ TMUX \] \(.*\) ->.*/\1/')
-        tmux switch-client -t "$session_name" 2>/dev/null \
-            || tmux attach -t "$session_name"
+        goto_session "$session_name"
         exit 0
     fi
-    
+
     dir="$selection"
 }
 
+# Switch to a session if we're inside tmux (works from a popup too),
+# otherwise attach to it.
+goto_session() {
+    if [ -n "$TMUX" ]; then
+        tmux switch-client -t "=$1"
+    else
+        tmux attach-session -t "=$1"
+    fi
+}
+
 main() {
-    sanity_check  
+    sanity_check
     find_directories
 
-    if [ -z "$dir" ]; then
-        exit 0
+    # tmux session names may not contain '.' or ':'
+    local name
+    name=$(basename "$dir" | tr '.:' '__')
+
+    # Create a detached session running nvim if one doesn't exist yet
+    if ! tmux has-session -t "=$name" 2>/dev/null; then
+        tmux new-session -d -s "$name" -c "$dir"
+        tmux send-keys -t "=$name:" "nvim ." Enter
     fi
 
-    if [ -z "$TMUX" ]; then
-        tmux new-session -c "$dir" \; send-keys "nvim ." Enter
-    else
-        cd "$dir" && nvim .
-    fi
+    goto_session "$name"
 }
 
 main
