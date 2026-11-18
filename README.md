@@ -18,30 +18,42 @@ sudo nixos-rebuild switch --flake .#laptop
 nix run 'github:mayniklas/eduroam-flake'#install-eduroam-dtu
 ```
 
-## Work machines
+## Work laptop
 
-Two hosts share the Hyprland desktop with the laptop but use `home/work.nix`
-instead of `home/personal.nix`:
+`work-laptop` (HP ZBook Studio 16 G11, Intel + Nvidia PRIME offload) shares
+the Hyprland desktop with the laptop but uses `home/work.nix` instead of
+`home/personal.nix`: work git identity by default (`tayctl` for
+github.com/tayctl repos), work SSH config, and kanshi turning the built-in
+screen off while docked.
 
-- `work-desktop` (Nvidia, see `modules/nvidia.nix`)
-- `work-laptop`
-
-```bash
-cp /etc/nixos/hardware-configuration.nix hosts/work-desktop/   # or hosts/work-laptop/
-git add .
-sudo nixos-rebuild switch --flake .#work-desktop               # or .#work-laptop
-```
-
-Add work git remotes to `workRemotes` in `home/work.nix` to use the work
-identity for those repos.
-
-Yocto/BitBake tooling (official BitBake language server, kas, build host deps)
-lives in an FHS dev shell rather than system-wide:
+Before wiping the old install, copy to a USB drive: `~/.ssh` (keys are not in
+this repo), `~/Projects` (anything unpushed) and optionally `~/.yocto-cache`.
 
 ```bash
-nix develop ~/dotfiles#yocto
+nix-shell -p git
+git clone https://github.com/tayctl/dotfiles ~/dotfiles
+cd ~/dotfiles && git checkout nix
+cp /etc/nixos/hardware-configuration.nix hosts/work-laptop/
+git add hosts/work-laptop/hardware-configuration.nix
+sudo nixos-rebuild switch --flake .#work-laptop
+
+# after the reboot, restore the SSH keys from the USB drive
+cp /run/media/$USER/<usb>/ssh/id_* ~/.ssh/
+chmod 600 ~/.ssh/id_ed25519 ~/.ssh/id_rsa
 ```
 
-Launch nvim from inside that shell so it picks up the BitBake LSP. The first
-build fails on `npmDepsHash` in `pkgs/language-server-bitbake/default.nix`;
-replace `lib.fakeHash` with the `got:` hash from the error.
+### Yocto
+
+Builds run in the team's container with `yb` (`scripts/yocto/yb.sh`, needs
+podman, which `modules/work.nix` enables). Tooling (kas, the official
+BitBake language server, minicom) comes from the devenv in `devenv/yocto`,
+symlinked into the project so the team repo stays untouched:
+
+```bash
+cd ~/Projects/ql-yocto
+ln -s ~/dotfiles/devenv/yocto/devenv.{nix,yaml} .
+printf '%s\n' devenv.nix devenv.yaml devenv.lock .devenv '.devenv*' >> .git/info/exclude
+devenv shell
+```
+
+Launch nvim from inside the devenv shell so it picks up the BitBake LSP.

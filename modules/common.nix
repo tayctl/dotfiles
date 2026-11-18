@@ -30,6 +30,7 @@
       "wheel"
       "networkmanager"
     ];
+    shell = pkgs.zsh;
     initialPassword = "changeme"; # change with `passwd` after first login
   };
 
@@ -65,7 +66,6 @@
       "git"
     ];
   };
-  users.users.${username}.shell = pkgs.zsh;
 
   boot.loader.systemd-boot.configurationLimit = 10;
 

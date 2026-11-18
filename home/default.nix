@@ -13,6 +13,9 @@ in
       name = "tayctl";
       email = "me@sebastiantaylor.com";
     };
+    settings.color.ui = "auto";
+    settings.pager.branch = false;
+    settings.push.autoSetupRemote = true;
 
     includes = [
       {
@@ -62,6 +65,7 @@ in
     ".tmux.conf".source = link "dots/.tmux.conf";
     ".config/btop".source = link "dots/.config/btop";
     ".config/lazygit".source = link "dots/.config/lazygit";
+    ".local/bin/fcd".source = link "scripts/fcd.sh";
   };
 
   home.sessionVariables = {

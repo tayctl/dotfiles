@@ -1,0 +1,6 @@
+inputs:
+  nixpkgs:
+    url: github:cachix/devenv-nixpkgs/rolling
+  # for the BitBake language server packaged in pkgs/
+  dotfiles:
+    url: git+file:///home/sebastian/dotfiles

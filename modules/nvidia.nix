@@ -8,10 +8,7 @@
     powerManagement.enable = true; # fixes corruption after suspend
   };
 
-  environment.sessionVariables = {
-    LIBVA_DRIVER_NAME = "nvidia";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    NVD_BACKEND = "direct";
-    NIXOS_OZONE_WL = "1";
-  };
+  # No LIBVA_DRIVER_NAME / __GLX_VENDOR_LIBRARY_NAME here: on a PRIME laptop
+  # they would push every app onto the Nvidia GPU.
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 }

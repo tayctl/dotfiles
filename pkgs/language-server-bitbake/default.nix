@@ -4,7 +4,6 @@
 # The npm tarball has no lockfile, so package-lock.json was generated with:
 #   npm install --package-lock-only --omit=dev --ignore-scripts
 #
-# First build will fail on npmDepsHash; paste the "got:" hash in.
 {
   lib,
   buildNpmPackage,
@@ -19,7 +18,7 @@ buildNpmPackage rec {
     hash = "sha256-Qg3WzG/6OoH7ayIdLQ5/DnB92rKPKfsHJhqH7XL2rwo=";
   };
 
-  npmDepsHash = lib.fakeHash;
+  npmDepsHash = "sha256-2HxOd/wTRnRK0Lg3O9J+3dU/kXKv2TblQdp4TVj+8J8=";
 
   postPatch = ''
     cp ${./package-lock.json} package-lock.json

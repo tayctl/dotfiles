@@ -57,23 +57,14 @@
         homeModules = [ ./home/personal.nix ];
       };
 
-      nixosConfigurations.work-desktop = mkHost {
-        username = "sebastian";
-        modules = [ ./hosts/work-desktop ];
-        homeModules = [ ./home/work.nix ];
-      };
-
       nixosConfigurations.work-laptop = mkHost {
         username = "sebastian";
         modules = [ ./hosts/work-laptop ];
         homeModules = [ ./home/work.nix ];
       };
 
-      devShells.${system}.yocto = import ./shells/yocto.nix {
-        pkgs = import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-        };
-      };
+      # Used by the yocto devenv (devenv/yocto)
+      packages.${system}.language-server-bitbake =
+        nixpkgs.legacyPackages.${system}.callPackage ./pkgs/language-server-bitbake { };
     };
 }

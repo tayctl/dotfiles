@@ -1,4 +1,4 @@
--- Official Yocto BitBake language server (provided by `nix develop ~/dotfiles#yocto`)
+-- Official Yocto BitBake language server (provided by the yocto devenv, see devenv/yocto)
 if vim.fn.executable('language-server-bitbake') == 1 then
   vim.lsp.config('bitbake_ls', {
     cmd = { 'language-server-bitbake', '--stdio' },
