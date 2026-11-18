@@ -1,4 +1,8 @@
+-- Formatters come from PATH (nix / project devenvs). Ones that aren't
+-- installed are skipped; if none is, the LSP formats instead (lsp.lua).
+-- stop_after_first: use the first one of the list that is installed.
 require('conform').setup({
+    notify_no_formatters = false,
     formatters_by_ft = {
         javascript = { 'prettier' },
         javascriptreact = { 'prettier' },
@@ -12,15 +16,20 @@ require('conform').setup({
         typst = { 'typstyle' },
         java = { 'spotless' },
         nix = { 'nixfmt' },
-        c = { "clang_format" },
+        c = { 'clang_format' },
+        cpp = { 'clang_format' },
+        python = { 'ruff_format', 'black', stop_after_first = true },
+        lua = { 'stylua' },
+        sh = { 'shfmt' },
+        bash = { 'shfmt' },
+        rust = { 'rustfmt' },
+        go = { 'gofmt' },
+        toml = { 'taplo' },
+        cmake = { 'cmake_format' },
     },
     formatters = {
         typstyle = {
-            command = vim.fn.stdpath('data') .. '/mason/bin/typstyle',
             prepend_args = { '--wrap-text' },
-        },
-        prettier = {
-            command = vim.fn.stdpath('data') .. '/mason/bin/prettier',
         },
         spotless = {
             command = 'gradle',

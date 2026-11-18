@@ -27,4 +27,3 @@ vim.lsp.config('sqls', {
     },
   },
 })
-vim.lsp.enable('sqls')
