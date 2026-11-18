@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Check if Bluetooth is powered on
 if ! bluetoothctl show | grep -q 'Powered: yes'; then

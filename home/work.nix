@@ -15,6 +15,7 @@ in
     teams-for-linux
     devenv
     kanshi
+    android-tools # adb, fastboot
   ];
 
   # Work identity by default, personal identity for my own GitHub repos
@@ -62,7 +63,8 @@ in
 
   # Docked to the 4K monitor most of the time: kanshi turns the built-in
   # screen off while an external monitor is connected
-  xdg.configFile."hypr-host/monitors.conf".source = link "dots/.config/hypr/taylor/monitors-work.conf";
+  xdg.configFile."hypr-host/host_monitors.lua".source = link "dots/.config/hypr/taylor/monitors-work.lua";
+  xdg.configFile."hypr-host/host_autostart.lua".source = link "dots/.config/hypr/taylor/autostart-work.lua";
   xdg.configFile."kanshi/config".text = ''
     profile docked {
       output eDP-1 disable

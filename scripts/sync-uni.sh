@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 CLOUD="$HOME/Cloud/Uni-sync"
 LOCAL="$HOME/Uni"

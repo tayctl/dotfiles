@@ -27,7 +27,8 @@ github.com/tayctl repos), work SSH config, and kanshi turning the built-in
 screen off while docked.
 
 Before wiping the old install, copy to a USB drive: `~/.ssh` (keys are not in
-this repo), `~/Projects` (anything unpushed) and optionally `~/.yocto-cache`.
+this repo), your work VPN `.ovpn` file and certificates, `~/Projects`
+(anything unpushed) and optionally `~/.yocto-cache`.
 
 ```bash
 nix-shell -p git
@@ -40,6 +41,9 @@ sudo nixos-rebuild switch --flake .#work-laptop
 # after the reboot, restore the SSH keys from the USB drive
 cp /run/media/$USER/<usb>/ssh/id_* ~/.ssh/
 chmod 600 ~/.ssh/id_ed25519 ~/.ssh/id_rsa
+
+# work VPN (NetworkManager OpenVPN plugin, see modules/work.nix)
+nmcli connection import type openvpn file /run/media/$USER/<usb>/work.ovpn
 ```
 
 ### Yocto

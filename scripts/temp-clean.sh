@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # temp-clean.sh
 #
 # Removes files and directories in $HOME/temp that haven't been modified

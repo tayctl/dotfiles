@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # filen-automount.sh - Mount Filen cloud storage via FUSE
 #
 # Waits for an internet connection and mounts the Filen drive. Retries up to

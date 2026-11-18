@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # typst-edit - compile and open a Typst document in Zathura
 #
 # Uses Typst for compilation and Zathura for PDF viewing.

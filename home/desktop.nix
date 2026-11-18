@@ -5,6 +5,7 @@
   ...
 }:
 let
+  zen = inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default;
   dotfiles = "${config.home.homeDirectory}/dotfiles";
   link = path: config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
 in
@@ -19,9 +20,20 @@ in
     hyprpicker
     hyprlauncher
     batsignal
-    thunar
-    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+    zen
     nerd-fonts.blex-mono
+
+    # launched by the Hyprland config (autostart.lua, keybinds.lua)
+    dunst
+    udiskie
+    cliphist
+    wl-clipboard
+    networkmanagerapplet
+    brightnessctl
+    playerctl
+    hyprshot
+    wofi
+    iwgtk
   ];
 
   home.file = {
@@ -32,6 +44,10 @@ in
     ".config/wofi".source = link "dots/.config/wofi";
     ".config/batsignal".source = link "dots/.config/batsignal";
     ".config/nvim".source = link "dots/.config/nvim";
+
+    ".local/bin/power-menu".source = link "scripts/power-menu.sh";
+    # programs.lua launches zen-browser, the flake's binary is called zen
+    ".local/bin/zen-browser".source = "${zen}/bin/zen";
 
   };
 

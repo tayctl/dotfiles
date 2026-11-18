@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/usr/bin/env bash
 # fcd.sh - Fuzzily find directories and Tmux sessions
 #
 # Uses fzf for searching predefine paths (via $FCD_SEARCH_DIRS) and detached
