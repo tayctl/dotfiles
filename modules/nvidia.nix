@@ -9,6 +9,6 @@
   };
 
   # No LIBVA_DRIVER_NAME / __GLX_VENDOR_LIBRARY_NAME here: on a PRIME laptop
-  # they would push every app onto the Nvidia GPU.
+  # they would push every app onto the Nvidia GPU (work-desktop sets them).
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 }

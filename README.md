@@ -18,13 +18,15 @@ sudo nixos-rebuild switch --flake .#laptop
 nix run 'github:mayniklas/eduroam-flake'#install-eduroam-dtu
 ```
 
-## Work laptop
+## Work machines
 
-`work-laptop` (HP ZBook Studio 16 G11, Intel + Nvidia PRIME offload) shares
-the Hyprland desktop with the laptop but uses `home/work.nix` instead of
-`home/personal.nix`: work git identity by default (`tayctl` for
-github.com/tayctl repos), work SSH config, and kanshi turning the built-in
-screen off while docked.
+`work-laptop` (HP ZBook Studio 16 G11, Intel + Nvidia PRIME offload) and
+`work-desktop` (Nvidia) share the Hyprland desktop with the laptop but use
+`home/work.nix` instead of `home/personal.nix`: work git identity by default
+(`tayctl` for github.com/tayctl repos), work SSH config, Teams, minicom, adb,
+devenv, `yb` and OpenVPN (`modules/work.nix`). Per machine, only the monitor
+setup differs: `home/work-laptop.nix` (kanshi turns the built-in screen off
+while docked) and `home/work-desktop.nix`.
 
 Before wiping the old install, copy to a USB drive: `~/.ssh` (keys are not in
 this repo), your work VPN `.ovpn` file and certificates, `~/Projects`
@@ -34,9 +36,9 @@ this repo), your work VPN `.ovpn` file and certificates, `~/Projects`
 nix-shell -p git
 git clone https://github.com/tayctl/dotfiles ~/dotfiles
 cd ~/dotfiles && git checkout nix
-cp /etc/nixos/hardware-configuration.nix hosts/work-laptop/
+cp /etc/nixos/hardware-configuration.nix hosts/work-laptop/      # or hosts/work-desktop/
 git add hosts/work-laptop/hardware-configuration.nix
-sudo nixos-rebuild switch --flake .#work-laptop
+sudo nixos-rebuild switch --flake .#work-laptop                 # or .#work-desktop
 
 # after the reboot, restore the SSH keys from the USB drive
 cp /run/media/$USER/<usb>/ssh/id_* ~/.ssh/

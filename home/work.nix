@@ -14,7 +14,6 @@ in
     claude-code
     teams-for-linux
     devenv
-    kanshi
     android-tools # adb, fastboot
   ];
 
@@ -61,18 +60,6 @@ in
 
   home.file.".local/bin/yb".source = link "scripts/yocto/yb.sh";
 
-  # Docked to the 4K monitor most of the time: kanshi turns the built-in
-  # screen off while an external monitor is connected
-  xdg.configFile."hypr-host/host_monitors.lua".source = link "dots/.config/hypr/taylor/monitors-work.lua";
+  # Monitors are per machine: home/work-laptop.nix, home/work-desktop.nix
   xdg.configFile."hypr-host/host_autostart.lua".source = link "dots/.config/hypr/taylor/autostart-work.lua";
-  xdg.configFile."kanshi/config".text = ''
-    profile docked {
-      output eDP-1 disable
-      output * mode preferred position 0,0 scale 1.5
-    }
-
-    profile undocked {
-      output eDP-1 enable mode preferred position 0,0 scale 1.5
-    }
-  '';
 }

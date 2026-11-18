@@ -60,7 +60,19 @@
       nixosConfigurations.work-laptop = mkHost {
         username = "sebastian";
         modules = [ ./hosts/work-laptop ];
-        homeModules = [ ./home/work.nix ];
+        homeModules = [
+          ./home/work.nix
+          ./home/work-laptop.nix
+        ];
+      };
+
+      nixosConfigurations.work-desktop = mkHost {
+        username = "sebastian";
+        modules = [ ./hosts/work-desktop ];
+        homeModules = [
+          ./home/work.nix
+          ./home/work-desktop.nix
+        ];
       };
 
       # Used by the yocto devenv (devenv/yocto)

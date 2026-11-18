@@ -39,6 +39,8 @@
     vim
     curl
     wget
+    file
+    gnupatch # patch
 
     noto-fonts
     noto-fonts-cjk-sans
