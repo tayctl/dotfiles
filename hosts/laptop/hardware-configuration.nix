@@ -8,37 +8,30 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" ];
-  boot.initrd.kernelModules = [ "dm-snapshot" ];
-  boot.kernelModules = [ "kvm-amd" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usbhid" "usb_storage" "sd_mod" ];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/mapper/ArchinstallVg-root";
+    { device = "/dev/disk/by-uuid/b81d37e7-79a7-416e-9adb-eb9b136809aa";
       fsType = "btrfs";
-      options = [ "subvol=@" ];
     };
 
   fileSystems."/home" =
-    { device = "/dev/mapper/ArchinstallVg-root";
+    { device = "/dev/disk/by-uuid/b81d37e7-79a7-416e-9adb-eb9b136809aa";
       fsType = "btrfs";
-      options = [ "subvol=@home" ];
+      options = [ "subvol=home" ];
     };
 
-  fileSystems."/var/cache/pacman/pkg" =
-    { device = "/dev/mapper/ArchinstallVg-root";
+  fileSystems."/nix" =
+    { device = "/dev/disk/by-uuid/b81d37e7-79a7-416e-9adb-eb9b136809aa";
       fsType = "btrfs";
-      options = [ "subvol=@pkg" ];
-    };
-
-  fileSystems."/var/log" =
-    { device = "/dev/mapper/ArchinstallVg-root";
-      fsType = "btrfs";
-      options = [ "subvol=@log" ];
+      options = [ "subvol=nix" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/54C9-C48F";
+    { device = "/dev/disk/by-uuid/BDAC-7C34";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
@@ -46,5 +39,6 @@
   swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.intel.npu.enable = true;
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

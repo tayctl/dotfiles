@@ -1,4 +1,4 @@
-{ pkgs, username, ... }: {
+{ pkgs, lib, username, ... }: {
   nix.settings = {
     experimental-features = [
       "nix-command"
@@ -16,7 +16,9 @@
     wifi.backend = "iwd";
   };
 
-  networking.wireless.enable = false;
+  # false here is only correct for the iwd backend; wpa_supplicant backends
+  # (e.g. work machines) need this true, which NetworkManager sets itself
+  networking.wireless.enable = lib.mkDefault false;
 
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.login.enableGnomeKeyring = true;

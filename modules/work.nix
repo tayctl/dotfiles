@@ -1,4 +1,4 @@
-{ pkgs, username, ... }: {
+{ pkgs, lib, username, ... }: {
   users.users.${username} = {
     description = "Sebastian";
     # serial access for minicom (/dev/ttyUSB*, /dev/ttyACM*)
@@ -14,4 +14,8 @@
   #   nmcli connection import type openvpn file work.ovpn
   networking.networkmanager.plugins = [ pkgs.networkmanager-openvpn ];
   environment.systemPackages = [ pkgs.openvpn ];
+
+  # wpa_supplicant instead of iwd: avoids iwd's corrupted-.psk "secrets were
+  # required but not provided" failures seen on work wifi
+  networking.networkmanager.wifi.backend = lib.mkForce "wpa_supplicant";
 }
