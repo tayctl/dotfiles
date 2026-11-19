@@ -63,6 +63,20 @@ in
     style.name = "breeze";
   };
 
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Gruvbox-Dark";
+      package = pkgs.gruvbox-gtk-theme;
+    };
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
+    gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
+    gtk4.extraConfig.gtk-application-prefer-dark-theme = true;
+  };
+
   home.pointerCursor = {
     enable = true;
     package = pkgs.bibata-cursors;

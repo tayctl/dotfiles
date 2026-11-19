@@ -1,11 +1,10 @@
 git:
-  pagers:
-    - pager: delta --dark --paging=never
+  diffRenderers:
+    - command: delta --dark --paging=never
       colorArg: always
   commit:
     signOff: true
   truncateCopiedCommitHashesTo: 7
-
 customCommands:
   - key: 'U'
     context: 'global'

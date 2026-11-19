@@ -43,6 +43,8 @@ in
     lazygit
     delta # lazygit pager
 
+    tealdeer
+
     # dev
     tree-sitter
   ];
@@ -64,6 +66,7 @@ in
     ".zshrc".source = link "dots/.zshrc";
     ".tmux.conf".source = link "dots/.tmux.conf";
     ".config/btop".source = link "dots/.config/btop";
+    ".config/direnv".source = link "dots/.config/direnv";
     ".config/lazygit".source = link "dots/.config/lazygit";
     ".local/bin/fcd".source = link "scripts/fcd.sh";
   };

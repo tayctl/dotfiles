@@ -14,6 +14,12 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # HP Thunderbolt Dock G4: its Ethernet/USB ports sit behind a PCIe tunnel
+  # that stays unauthorized without boltd running. After rebuilding, enroll
+  # it once with `boltctl enroll --policy auto <uuid>` (see `boltctl list`)
+  # so future connects are authorized automatically.
+  services.hardware.bolt.enable = true;
+
   # HP ZBook Studio 16 G11: Intel Arc (Meteor Lake) + RTX 4070 Max-Q.
   # The desktop (and the dock's DisplayPort outputs) run on the Intel GPU;
   # run an app on the Nvidia GPU with `nvidia-offload <cmd>`.

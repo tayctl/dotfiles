@@ -15,6 +15,10 @@ in
     teams-for-linux
     devenv
     android-tools # adb, fastboot
+    openfortivpn
+    git-repo
+    docker
+    podman
   ];
 
   # Work identity by default, personal identity for my own GitHub repos
@@ -61,5 +65,6 @@ in
   home.file.".local/bin/yb".source = link "scripts/yocto/yb.sh";
 
   # Monitors are per machine: home/work-laptop.nix, home/work-desktop.nix
-  xdg.configFile."hypr-host/host_autostart.lua".source = link "dots/.config/hypr/taylor/autostart-work.lua";
+  xdg.configFile."hypr-host/host_autostart.lua".source =
+    link "dots/.config/hypr/taylor/autostart-work.lua";
 }

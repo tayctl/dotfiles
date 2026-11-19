@@ -1,0 +1,7 @@
+[global]
+hide_env_diff = true
+# log_filter is an allowlist, not a blocklist: only direnv log lines matching
+# this regex are shown (raw stderr from a failed command, e.g. a nix trace,
+# is unaffected either way). Add more terms here if another project's
+# direnv status message needs to show through too.
+log_filter = "devenv active|error|fail"
