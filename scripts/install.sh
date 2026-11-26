@@ -387,10 +387,13 @@ setup_scripts() {
     local script
     mkdir -p "$HOME/.local/bin"
 
-    for script in fcd filen-automount power-menu temp-clean; do
+    for script in fcd pclone theme filen-automount power-menu temp-clean; do
         chmod +x "$REPO_ROOT/scripts/$script.sh"
         ln -sfn "$REPO_ROOT/scripts/$script.sh" "$HOME/.local/bin/$script"
     done
+
+    # Render colour files that app configs include (needed before first launch)
+    "$REPO_ROOT/scripts/theme.sh" --init
 }
 
 setup_zsh() {

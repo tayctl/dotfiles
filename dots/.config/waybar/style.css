@@ -1,3 +1,5 @@
+@import url("file:///home/taylor/.local/state/theme/colors.css");
+
 * {
     padding: 0;
     margin: 0;
@@ -10,7 +12,7 @@
 }
 
 window#waybar {
-    background: #282828;
+    background: @bg;
     padding: 3px 0;
 }
 
@@ -33,7 +35,7 @@ window#waybar.hidden {
 #mpris {
     font-family: BlexMono Nerd Font;
     font-size: 10.5px;
-    color: #282828;
+    color: @bg;
     margin-right: 6px;
     margin-left: 6px;
     padding: 3px 7px;
@@ -49,7 +51,7 @@ window#waybar.hidden {
     font-family: "BlexMono Nerd Font";
     font-size: 10.5px;
     font-weight: 600;
-    color: #282828;
+    color: @bg;
     padding: 3px 7px;
     border-bottom: 2px solid;
     margin-top: 2px;
@@ -59,7 +61,7 @@ window#waybar.hidden {
 }
 
 #workspaces button {
-    color: #ebdbb2;
+    color: @fg;
     border-radius: 0;
     margin-bottom: 3px;
     margin-top: 3px;
@@ -70,31 +72,31 @@ window#waybar.hidden {
 }
 
 #workspaces button:hover {
-    background: #79740e;
+    background: @green_dim;
 }
 
 #workspaces button.active {
-    background: #b8bb26;
-    color: #282828;
+    background: @bgreen;
+    color: @bg;
 }
 
 #workspaces button.urgent {
-    background: #ea6962;
+    background: @bred;
 }
 
 /* ======================================================== */
 /* window */
 /* ======================================================== */
 #window {
-    color: #282828;
-    background: #83a598;
+    color: @bg;
+    background: @bblue;
     border-radius: 0;
     margin-top: 2px;
     margin-bottom: 2px;
     margin-left: 6px;
     margin-right: 6px;
     padding: 3px 7px;
-    border-bottom-color: #5a8b8c;
+    border-bottom-color: @blue;
 }
 
 window#waybar.empty #window {
@@ -109,77 +111,77 @@ window#waybar.empty #window {
 /* Network module */
 /* ======================================================== */
 #network {
-    color: #fe8019;
-    border-bottom-color: #fe8019;
+    color: @orange;
+    border-bottom-color: @orange;
 }
 
 #network.disconnected {
-    color: #cc241d;
-    border-bottom-color: #cc241d;
+    color: @red;
+    border-bottom-color: @red;
 }
 
 /* ======================================================== */
 /* Audio module */
 /* ======================================================== */
 #wireplumber {
-    color: #689d6a;
-    border-bottom-color: #689d6a;
+    color: @cyan;
+    border-bottom-color: @cyan;
 }
 
 #wireplumber.muted {
-    color: #ea6962;
-    border-bottom-color: #ea6962;
+    color: @bred;
+    border-bottom-color: @bred;
 }
 
 /* ======================================================== */
 /* cpu */
 /* ======================================================== */
 #cpu {
-    color: #b8bb26;
-    border-bottom-color: #b8bb26;
+    color: @bgreen;
+    border-bottom-color: @bgreen;
 }
 
 /* ======================================================== */
 /* memory */
 /* ======================================================== */
 #memory {
-    color: #689d6a;
-    border-bottom-color: #689d6a;
+    color: @cyan;
+    border-bottom-color: @cyan;
 }
 
 /* ======================================================== */
 /* backlight */
 /* ======================================================== */
 #backlight {
-    color: #d8a657;
-    border-bottom-color: #d8a657;
+    color: @yellow;
+    border-bottom-color: @yellow;
 }
 
 /* ======================================================== */
 /* battery */
 /* ======================================================== */
 #battery {
-    color: #98971a;
-    border-bottom-color: #98971a;
+    color: @green;
+    border-bottom-color: @green;
 }
 
 #battery.charging,
 #battery.plugged {
-    color: #b8bb26;
-    border-bottom-color: #b8bb26;
+    color: @bgreen;
+    border-bottom-color: @bgreen;
 }
 
 #battery.critical:not(.charging) {
-    color: #cc241d;
-    border-bottom-color: #cc241d;
+    color: @red;
+    border-bottom-color: @red;
 }
 
 /* ======================================================== */
 /* clock */
 /* ======================================================== */
 #clock {
-    color: #8ec07c;
-    border-bottom-color: #8ec07c;
+    color: @bcyan;
+    border-bottom-color: @bcyan;
 }
 
 /* ======================================================== */
@@ -189,47 +191,47 @@ window#waybar.empty #window {
     padding: 3px 7px;
     margin-left: 6px;
     margin-right: 6px;
-    border-bottom-color: #fbf1c7;
+    border-bottom-color: @fg_bright;
 }
 
 /* ======================================================== */
 /* custom-launcher */
 /* ======================================================== */
 #custom-launcher {
-    color: #076678;
+    color: @blue_dim;
     font-size: 12px;
     margin-left: 6px;
     margin-right: 6px;
-    border-bottom-color: #076678;
+    border-bottom-color: @blue_dim;
 }
 
 /* ======================================================== */
 /* custom-bluetooth */
 /* ======================================================== */
 #custom-bluetooth {
-    color: #458588;
-    border-bottom-color: #458588;
+    color: @blue;
+    border-bottom-color: @blue;
 }
 
 /* ======================================================== */
 /* custom-updates */
 /* ======================================================== */
 #custom-updates {
-    color: #fabd2f;
-    border-bottom-color: #fabd2f;
+    color: @byellow;
+    border-bottom-color: @byellow;
 }
 
 /* ======================================================== */
 /* Media player */
 /* ======================================================== */
 #mpris {
-    color: #689d6a;
-    border-bottom-color: #689d6a;
+    color: @cyan;
+    border-bottom-color: @cyan;
 }
 
 #mpris:hover {
-    color: #98971a;
-    border-bottom-color: #98971a;
+    color: @green;
+    border-bottom-color: @green;
 }
 
 /* ======================================================== */
@@ -249,19 +251,19 @@ window#waybar.empty #window {
     border-radius: 0;
     margin: 2px 1px;
     padding: 2px 2px;
-    color: #ebdbb2;
-    border-bottom: 2px solid #928374;
+    color: @fg;
+    border-bottom: 2px solid @muted;
     min-width: 14px;
 }
 
 #taskbar button.active {
-    border-bottom-color: #b8bb26;
+    border-bottom-color: @bgreen;
 }
 
 #taskbar button:hover {
-    border-bottom-color: #79740e;
+    border-bottom-color: @green_dim;
 }
 
 #taskbar button.urgent {
-    border-bottom-color: #fb4934;
+    border-bottom-color: @bred;
 }

@@ -21,6 +21,7 @@ bind("P",           hl.dsp.window.pseudo()) -- dwindle
 bind("I",           hl.dsp.exec_cmd("pkill -x iwgtk || iwgtk"))
 bind("SHIFT + V",   hl.dsp.exec_cmd("cliphist list | wofi --dmenu | cliphist decode | wl-copy"))
 bind("SHIFT + E",   hl.dsp.exec_cmd("$HOME/.local/bin/power-menu"))
+bind("SHIFT + T",   hl.dsp.exec_cmd("$HOME/.local/bin/theme"))
 
 hl.bind("PRINT",         hl.dsp.exec_cmd("hyprshot -m window"))
 hl.bind("SHIFT + PRINT", hl.dsp.exec_cmd("hyprshot -m region"))
