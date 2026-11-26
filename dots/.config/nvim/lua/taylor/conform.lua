@@ -16,7 +16,7 @@ require('conform').setup({
     formatters = {
         typstyle = {
             command = vim.fn.stdpath('data') .. '/mason/bin/typstyle',
-            prepend_args = { '--wrap-text' },
+            prepend_args = { '--wrap-text', '--line-width', '80' },
         },
         prettier = {
             command = vim.fn.stdpath('data') .. '/mason/bin/prettier',

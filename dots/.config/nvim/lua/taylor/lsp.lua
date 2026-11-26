@@ -68,6 +68,7 @@ require('mason-lspconfig').setup({
     'texlab',
     'fsautocomplete',
     'jdtls',
+    'harper_ls',
   },
 
   handlers = {
@@ -75,6 +76,20 @@ require('mason-lspconfig').setup({
     function(server_name)
       require('lspconfig')[server_name].setup({
         capabilities = lsp_capabilities,
+      })
+    end,
+
+    -- Harper grammar/spell checker
+    harper_ls = function()
+      require('lspconfig').harper_ls.setup({
+        capabilities = lsp_capabilities,
+        filetypes = { 'typst', 'markdown', 'text', 'gitcommit' },
+        settings = {
+          ['harper-ls'] = {
+            dialect = 'British',
+            userDictPath = vim.fn.stdpath('config') .. '/harper_dict.txt',
+          },
+        },
       })
     end,
 
