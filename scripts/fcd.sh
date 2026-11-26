@@ -14,7 +14,8 @@
 
 
 # Function sanity_check
-# checks that the relevant programs are installed on the machine before running the script
+# checks that the relevant programs are installed on the machine before running 
+# the script
 sanity_check() {
     if ! command -v tmux >/dev/null 2>&1
     then 

@@ -19,6 +19,9 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("pika-backup-monitor")
     hl.exec_cmd("nm-applet --indicator")
     hl.exec_cmd("blueman-manager")
+    -- start the tmux server so continuum restores sessions before the first terminal opens;
+    -- exit-empty off keeps it alive while the (async) restore recreates them
+    hl.exec_cmd("tmux start-server \\; set -g exit-empty off")
 
     --------------------
     --- STARTUP APPS ---

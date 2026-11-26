@@ -33,8 +33,8 @@ sanity_check() {
         exit 1
     fi
 
-    if ! command -v zathura >/dev/null 2>&1; then
-        echo "zathura not installed"
+    if ! command -v sioyek >/dev/null 2>&1; then
+        echo "sioyek not installed"
         exit 1
     fi
 }
@@ -47,7 +47,7 @@ main() {
         exit 1
     }
 
-    zathura "$pdf" &
+    sioyek "$pdf" &
     typst watch "$file" "$pdf"
 }
 
